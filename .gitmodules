@@ -1,0 +1,6 @@
+[submodule "gatekeeper-admin"]
+	path = gatekeeper-admin
+	url = https://github.com/jagat-banera/gatekeeper-admin.git
+[submodule "gatekeeper-gateway"]
+	path = gatekeeper-gateway
+	url = https://github.com/jagat-banera/gatekeeper-gateway.git
