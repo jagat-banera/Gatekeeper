@@ -1,0 +1,36 @@
+
+services:
+  admin:
+    build: ./gatekeeper-admin
+    container_name: gatekeeper-admin
+    ports:
+      - "8081:8081"
+    healthcheck:
+      test: [ "CMD", "wget", "--spider", "-q", "http://localhost:8081/actuator/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    networks:
+      - gatekeeper-net
+
+
+  gateway:
+    build: ./gatekeeper-gateway
+    container_name: gatekeeper-gateway
+    ports:
+      - "8082:8082"
+      - "8080:8080"
+    depends_on:
+      admin:
+         condition: service_healthy
+    networks:
+      - gatekeeper-net
+
+networks:
+  gatekeeper-net:
+    driver: bridge
+
+
+
+
